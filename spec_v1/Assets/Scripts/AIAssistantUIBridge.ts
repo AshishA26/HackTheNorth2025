@@ -49,6 +49,7 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
   @ui.group_end
   private textIsVisible: boolean = true;
   private currentAssistant: GeminiAssistant | OpenAIAssistant;
+  private isAIActive: boolean = false;
 
   onAwake() {
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this));
@@ -56,9 +57,17 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
 
   private onStart() {
     this.geminiButton.onButtonPinched.add(() => {
-      this.assistantType = AssistantType.Gemini;
-      this.hintTitle.text = "Gemini Live Example";
-      this.startWebsocketAndUI();
+      if (!this.isAIActive) {
+        // Start AI mode
+        this.assistantType = AssistantType.Gemini;
+        this.hintTitle.text = "Gemini Live Example";
+        this.startWebsocketAndUI();
+        this.isAIActive = true;
+        this.updateButtonTexts();
+      } else {
+        // Exit AI mode
+        this.exitAIMode();
+      }
     });
 
     this.openAIButton.onButtonPinched.add(() => {
@@ -95,7 +104,7 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
   }
 
   private startWebsocketAndUI() {
-    this.hideButtons();
+    // this.hideButtons();
     this.hintText.text = "AI Assistant is now active - start talking!";
     if (global.deviceInfoSystem.isEditor()) {
       this.hintText.text = "AI Assistant is now active - start talking!";
@@ -141,6 +150,42 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
     setTimeout(() => {
       this.sphereController.isActivatedEvent.invoke(true);
     }, 1000); // 1 second delay to let the UI settle
+  }
+
+  private exitAIMode() {
+    // Stop the current assistant
+    if (this.currentAssistant) {
+      this.currentAssistant.streamData(false);
+      this.currentAssistant.interruptAudioOutput();
+    }
+    
+    // Reset UI
+    this.isAIActive = false;
+    this.textIsVisible = true;
+    this.hintTitle.text = "Select an AI Assistant";
+    this.hintText.text = "Pinch Gemini to start";
+    
+    // Show only Gemini button, keep OpenAI hidden
+    this.geminiButton.enabled = true;
+    this.geminiButton.sceneObject.enabled = true;
+    this.openAIButton.enabled = false;
+    this.openAIButton.sceneObject.enabled = false;
+    
+    // Hide sphere controller
+    this.sphereController.sceneObject.enabled = false;
+    
+    // Reset button texts
+    this.updateButtonTexts();
+  }
+
+  private updateButtonTexts() {
+    if (this.isAIActive) {
+      // Change Gemini button text to "Exit AI Assist"
+      this.geminiButton.sceneObject.getChild(0).getComponent("Component.Text").text = "Exit AI Assist";
+    } else {
+      // Reset Gemini button to "AI Assist"
+      this.geminiButton.sceneObject.getChild(0).getComponent("Component.Text").text = "AI Assist";
+    }
   }
 
   private connectAssistantEvents() {
