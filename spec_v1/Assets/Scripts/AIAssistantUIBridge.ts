@@ -50,6 +50,7 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
   private textIsVisible: boolean = true;
   private currentAssistant: GeminiAssistant | OpenAIAssistant;
   private isAIActive: boolean = false;
+  private accumulatedGeminiText: string = "";
 
   onAwake() {
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this));
@@ -110,6 +111,9 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
       this.hintText.text = "AI Assistant is now active - start talking!";
     }
     this.sphereController.initializeUI();
+    
+    // Reset accumulated text for new conversation
+    this.accumulatedGeminiText = "";
     // Set the current assistant based on selection
     this.currentAssistant =
       this.assistantType === AssistantType.Gemini
@@ -165,14 +169,17 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
     this.hintTitle.text = "Select an AI Assistant";
     this.hintText.text = "Pinch Gemini to start";
     
+    // Reset accumulated text
+    this.accumulatedGeminiText = "";
+    
     // Show only Gemini button, keep OpenAI hidden
     this.geminiButton.enabled = true;
     this.geminiButton.sceneObject.enabled = true;
     this.openAIButton.enabled = false;
     this.openAIButton.sceneObject.enabled = false;
     
-    // Hide sphere controller
-    this.sphereController.sceneObject.enabled = false;
+    // Keep sphere controller enabled for text display
+    this.sphereController.sceneObject.enabled = true;
     
     // Reset button texts
     this.updateButtonTexts();
@@ -188,10 +195,49 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
     }
   }
 
+  private checkGeminiResponse(text: string) {
+    // Accumulate text from multiple messages
+    this.accumulatedGeminiText += text;
+    
+    // Convert accumulated text to lowercase for case-insensitive matching
+    const lowerText = this.accumulatedGeminiText.toLowerCase();
+    
+    // Check if Gemini mentions seeing an exit sign and says yes
+    let isYes = lowerText.includes("yes") || lowerText.includes("yup") || lowerText.includes("yep") || lowerText.includes("yeah");
+    if (lowerText.includes("exit") && lowerText.includes("sign") && isYes) {
+      print("YES - Gemini sees an exit sign!");
+      // Reset accumulated text to avoid multiple triggers
+      this.accumulatedGeminiText = "";
+      
+      // Send hidden prompt to ask for steps
+      this.askForStepsToWalk();
+    }
+    
+    // You can add more response checks here
+    if (isYes) {
+      print("Gemini said: " + this.accumulatedGeminiText);
+    }
+  }
+
+  private askForStepsToWalk() {
+    // Send a hidden prompt to Gemini asking for steps to walk
+    if (this.currentAssistant && this.assistantType === AssistantType.Gemini) {
+      const hiddenPrompt = "How many steps do I need to walk to reach the exit sign? Please give me a specific number of steps and a direction.";
+      
+      // Wait 2 seconds before sending the hidden prompt
+      setTimeout(() => {
+        this.geminiAssistant.sendTextMessage(hiddenPrompt);
+      }, 5000);
+    }
+  }
+
   private connectAssistantEvents() {
     // Connect text update events
     this.currentAssistant.updateTextEvent.add((data) => {
       this.sphereController.setText(data);
+      
+      // Check for specific responses from Gemini
+      this.checkGeminiResponse(data.text);
     });
 
     // Connect function call events

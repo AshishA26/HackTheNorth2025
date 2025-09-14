@@ -30,7 +30,7 @@ export class GeminiAssistant extends BaseScriptComponent {
   @input
   @widget(new TextAreaWidget())
   private instructions: string =
-    "You are a helpful assistant that loves to make puns";
+    "You are a helpful assistant that loves to make puns. IMPORTANT: Always use the word 'yes' instead of alternatives like 'yup', 'yep', 'yeah', 'sure', 'okay', or 'alright'. When answering affirmatively, always say 'yes'.";
   @input private haveVideoInput: boolean = false;
   @ui.group_end
   @ui.separator
@@ -331,6 +331,25 @@ export class GeminiAssistant extends BaseScriptComponent {
       this.dynamicAudioOutput.interruptAudioOutput();
     } else {
       print("DynamicAudioOutput is not initialized.");
+    }
+  }
+
+  public sendTextMessage(text: string): void {
+    if (this.GeminiLive) {
+      const message = {
+        realtime_input: {
+          media_chunks: [
+            {
+              mime_type: "text/plain",
+              data: Base64.encode(new TextEncoder().encode(text)),
+            },
+          ],
+        },
+      };
+      this.GeminiLive.send(message);
+      print("Sent text message to Gemini: " + text);
+    } else {
+      print("GeminiLive websocket is not initialized.");
     }
   }
 }
