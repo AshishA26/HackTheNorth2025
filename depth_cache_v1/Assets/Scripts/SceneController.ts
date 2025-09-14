@@ -4,6 +4,7 @@ import { ResponseUI } from "./ResponseUI";
 import { Loading } from "./Loading";
 import { DepthCache } from "./DepthCache";
 import { DebugVisualizer } from "./DebugVisualizer";
+import { TargetBoxController } from "./TargetBoxController";
 
 @component
 export class SceneController extends BaseScriptComponent {
@@ -28,6 +29,9 @@ export class SceneController extends BaseScriptComponent {
   @input
   @hint("Caches depth frame and converts pixel positions to world space")
   depthCache: DepthCache;
+  @input
+  @hint("Controls the target box that highlights detections")
+  targetBoxController: TargetBoxController = null;
 
   private isRequestRunning = false;
 
@@ -82,6 +86,7 @@ export class SceneController extends BaseScriptComponent {
       print("GEMINI Points LENGTH: " + response.points.length);
       this.responseUI.openResponseBubble(response.aiMessage);
       //create points and labels
+      var firstValidDetection = null;
       for (var i = 0; i < response.points.length; i++) {
         var pointObj = response.points[i];
         if (this.showDebugVisuals) {
@@ -103,6 +108,11 @@ export class SceneController extends BaseScriptComponent {
           // Add xyz coordinates to the point object for potential future use
           pointObj.worldPosition = worldPosition;
           
+          // Store the first valid detection for TargetBox
+          if (firstValidDetection == null) {
+            firstValidDetection = { worldPosition: worldPosition, label: pointObj.label };
+          }
+          
           //create and position label in world space
           this.responseUI.loadWorldLabel(
             pointObj.label,
@@ -112,6 +122,19 @@ export class SceneController extends BaseScriptComponent {
         } else {
           print(`Detection ${i + 1}: "${pointObj.label}" - Could not determine world position (outside depth frame or invalid depth)`);
         }
+      }
+      
+      // Move TargetBox to the first valid detection
+      if (firstValidDetection != null && this.targetBoxController != null) {
+        this.targetBoxController.moveToPosition(
+          firstValidDetection.worldPosition, 
+          firstValidDetection.label
+        );
+      } else if (this.targetBoxController != null) {
+        // Hide TargetBox if no valid detections
+        this.targetBoxController.hide();
+      } else {
+        print("TargetBoxController not connected - skipping TargetBox movement");
       }
       this.depthCache.disposeDepthFrame(depthFrameID);
     });

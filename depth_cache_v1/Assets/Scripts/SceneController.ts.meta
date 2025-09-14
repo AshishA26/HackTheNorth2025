@@ -34,6 +34,7 @@
     responseUI: false
     showDebugVisuals: false
     speechUI: false
+    targetBoxController: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -46,6 +47,7 @@
       responseUI: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
       loading: !<MappingBased.AssignableType_4> 00000000-0000-0000-0000-000000000000
       depthCache: !<MappingBased.AssignableType_5> 00000000-0000-0000-0000-000000000000
+      targetBoxController: !<MappingBased.AssignableType_6> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
@@ -57,3 +59,4 @@
     - '// @input AssignableType_3 responseUI {"hint":"Displays AI speech output"}'
     - '// @input AssignableType_4 loading {"hint":"Loading visual"}'
     - '// @input AssignableType_5 depthCache {"hint":"Caches depth frame and converts pixel positions to world space"}'
+    - '// @input AssignableType_6 targetBoxController {"hint":"Controls the target box that highlights detections"}'

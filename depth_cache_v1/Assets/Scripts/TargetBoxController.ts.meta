@@ -1,0 +1,41 @@
+- !<AssetImportMetadata/6dd18515-a847-4347-9d57-25a00ec85809>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> faad86cc-e76a-4633-8d3d-d9de3eb2cbe3
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> faad86cc-e76a-4633-8d3d-d9de3eb2cbe3
+  PackageType: NotAPackage
+  PackagePolicy: CannotBeUnpacked
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> dba4ea0d-f79b-4162-80bc-12c3ac8c2e17
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/dba4ea0d-f79b-4162-80bc-12c3ac8c2e17>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: be56e44b-6ce0-4c67-a943-b31e39146265
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  CurrentVisibility: Editable
+  MaxVisibility: Editable
+  ScriptInputsHidden:
+    targetBox: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  DefaultScriptInputs:
+    - targetBox: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input SceneObject targetBox {"hint":"The target box object to move"}'
