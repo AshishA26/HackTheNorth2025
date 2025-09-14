@@ -15,5 +15,7 @@ Challenges We Faced
 Like any hackathon project, we faced challenges. The steep learning curve of Lens Studio made development difficult, and ensuring smooth, real-time performance on the hardware required careful optimization. We also attempted to train our own model for detecting fire exits, but quickly realized that high-quality training data and sufficient time were outside the scope of a weekend hackathon. Still, pivoting and problem-solving under time pressure taught us valuable lessons about adapting to constraints.
 
 Accomplishments That We Are Proud Of
+
 In the end, we are proud of creating a prototype that successfully integrates computer vision with AR overlays to make navigation in high-stress situations easier. We’re also proud of how much we learned during our first hackathon — from technical integration to design thinking — and of building a project that demonstrates how AR can be more than entertainment; it can be a critical technology for saving lives.
+
 
