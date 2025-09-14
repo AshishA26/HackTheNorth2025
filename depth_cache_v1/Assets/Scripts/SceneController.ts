@@ -95,12 +95,22 @@ export class SceneController extends BaseScriptComponent {
           depthFrameID
         );
         if (worldPosition != null) {
+          // Log xyz coordinates for each detection
+          print(`Detection ${i + 1}: "${pointObj.label}"`);
+          // print(`  Pixel Position: (${pointObj.pixelPos.x.toFixed(2)}, ${pointObj.pixelPos.y.toFixed(2)})`);
+          print(`  World Position (XYZ): (${worldPosition.x.toFixed(3)}, ${worldPosition.y.toFixed(3)}, ${worldPosition.z.toFixed(3)})`);
+          
+          // Add xyz coordinates to the point object for potential future use
+          pointObj.worldPosition = worldPosition;
+          
           //create and position label in world space
           this.responseUI.loadWorldLabel(
             pointObj.label,
             worldPosition,
             pointObj.showArrow
           );
+        } else {
+          print(`Detection ${i + 1}: "${pointObj.label}" - Could not determine world position (outside depth frame or invalid depth)`);
         }
       }
       this.depthCache.disposeDepthFrame(depthFrameID);
