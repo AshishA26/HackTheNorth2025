@@ -5,6 +5,7 @@ import { Snap3DInteractableFactory } from "./Snap3DInteractableFactory";
 import { SphereController } from "./SphereController";
 import { LSTween } from "LSTween.lspkg/LSTween";
 import Easing from "LSTween.lspkg/TweenJS/Easing";
+import { setTimeout } from "SpectaclesInteractionKit.lspkg/Utils/FunctionTimingUtils";
 
 enum AssistantType {
   Gemini = "Gemini",
@@ -95,9 +96,9 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
 
   private startWebsocketAndUI() {
     this.hideButtons();
-    this.hintText.text = "Pinch on the orb next to your left hand to activate";
+    this.hintText.text = "AI Assistant is now active - start talking!";
     if (global.deviceInfoSystem.isEditor()) {
-      this.hintText.text = "Look down and click on the orb to activate";
+      this.hintText.text = "AI Assistant is now active - start talking!";
     }
     this.sphereController.initializeUI();
     // Set the current assistant based on selection
@@ -135,6 +136,11 @@ export class AIAssistantUIBridge extends BaseScriptComponent {
         this.currentAssistant.interruptAudioOutput();
       }
     });
+
+    // Automatically activate the AI after a short delay
+    setTimeout(() => {
+      this.sphereController.isActivatedEvent.invoke(true);
+    }, 1000); // 1 second delay to let the UI settle
   }
 
   private connectAssistantEvents() {
