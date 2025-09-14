@@ -9,6 +9,8 @@ export class TargetBoxController extends BaseScriptComponent {
   onAwake() {
     if (this.targetBox) {
       this.targetBoxTransform = this.targetBox.getTransform();
+      // Hide target box by moving it far away
+      this.targetBoxTransform.setWorldPosition(new vec3(0, -1000, 0));
     } else {
       print("Warning: targetBox not provided to TargetBoxController");
     }

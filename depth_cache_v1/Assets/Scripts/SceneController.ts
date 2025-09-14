@@ -129,18 +129,21 @@ export class SceneController extends BaseScriptComponent {
         }
       }
       
-      // Move TargetBox to the first valid detection
-      if (firstValidDetection != null && this.targetBoxController != null) {
-        this.targetBoxController.moveToPosition(
-          firstValidDetection.worldPosition, 
-          firstValidDetection.label
-        );
-      } else if (this.targetBoxController != null) {
-        // Hide TargetBox if no valid detections
-        this.targetBoxController.hide();
-      } else {
-        print("TargetBoxController not connected - skipping TargetBox movement");
-      }
+       // Move TargetBox to the first valid detection
+       if (firstValidDetection != null && this.targetBoxController != null) {
+         this.targetBoxController.moveToPosition(
+           firstValidDetection.worldPosition, 
+           firstValidDetection.label
+         );
+         // Hide UI elements once target is found
+         this.responseUI.closeResponseBubble();
+         this.speechUI.activateSpeechButton(false);
+       } else if (this.targetBoxController != null) {
+         // Hide TargetBox if no valid detections
+         this.targetBoxController.hide();
+       } else {
+         print("TargetBoxController not connected - skipping TargetBox movement");
+       }
       this.depthCache.disposeDepthFrame(depthFrameID);
     });
   }

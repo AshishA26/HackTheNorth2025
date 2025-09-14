@@ -1,0 +1,138 @@
+- !<Material/b4faee9f-c010-4135-839b-20885b34ea03>
+  PackagePath: ""
+  PassesInfo:
+    - !<own> 9d5ad255-60eb-43c2-8581-97463dc8f3b7
+- !<PassInfo/9d5ad255-60eb-43c2-8581-97463dc8f3b7>
+  CachedProperties:
+    - Port_Depth_N004:
+        typeIdx: 1
+        value: 1.000000
+    - Port_FinalColor1_N004:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - Port_FinalColor2_N004:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - Port_FinalColor3_N004:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - Port_GSplatPointSize_N004:
+        typeIdx: 1
+        value: 0.000000
+    - Port_GSplatRotation_N004:
+        typeIdx: 5
+        value: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+    - Port_GSplatScale_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_LODValue_N009:
+        typeIdx: 1
+        value: 0.000000
+    - Port_Metallic_N000:
+        typeIdx: 1
+        value: 1.000000
+    - Port_Normal_N000:
+        typeIdx: 4
+        value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_RayDirection_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 1.000000, z: 0.000000}
+    - Port_RayOrigin_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_Roughness_N000:
+        typeIdx: 1
+        value: 1.000000
+    - Port_SpecularAO_N000:
+        typeIdx: 4
+        value: {x: 1.000000, y: 1.000000, z: 1.000000}
+    - Port_UVCoord_N009:
+        typeIdx: 3
+        value: {x: 0.000000, y: 0.000000}
+    - Port_WorldNormal_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 1.000000, z: 0.000000}
+    - Port_WorldPosition_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_WorldTangent_N004:
+        typeIdx: 4
+        value: {x: 0.000000, y: 0.000000, z: 1.000000}
+    - isProxyMode:
+        typeIdx: 2
+        value: false
+    - mainColor:
+        typeIdx: 5
+        value: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+    - receivesRayTracedReflections:
+        typeIdx: 2
+        value: false
+    - receivesRayTracedShadows:
+        typeIdx: 2
+        value: false
+  DepthWrite: true
+  DepthTest: true
+  DepthFunction: LessEqual
+  TwoSided: true
+  ColorMask: {x: true, y: true, z: true, w: true}
+  CullMode: Back
+  PolygonOffset: {x: 0.000000, y: 0.000000}
+  FrustumCulling: Auto
+  FrustumCullPad: 0.000000
+  InstanceCount: 1
+  Defines:
+    []
+  BlendMode: PremultipliedAlphaAuto
+  Properties:
+    Port_AO_N000:
+      typeIdx: 4
+      value: {x: 0.745098, y: 0.196078, z: 0.058824}
+    Port_Blue_N011:
+      typeIdx: 4
+      value: {x: 1.000000, y: 0.439216, z: 0.180392}
+    Port_Green_N011:
+      typeIdx: 4
+      value: {x: 0.274510, y: 1.000000, z: 0.074510}
+    Port_Offset_N003:
+      typeIdx: 1
+      value: 0.000000
+    Port_Offset_N007:
+      typeIdx: 1
+      value: 0.000000
+    Port_Red_N011:
+      typeIdx: 4
+      value: {x: 1.000000, y: 0.000000, z: 0.000000}
+    Port_Scale_N003:
+      typeIdx: 3
+      value: {x: 5.000000, y: 5.000000}
+    Port_Scale_N007:
+      typeIdx: 3
+      value: {x: 9.000000, y: 8.000000}
+    PreviewEnabled:
+      typeIdx: 0
+      value: 0
+    Tweak_N13:
+      typeIdx: 3
+      value: {x: 1.000000, y: 1.000000}
+    Tweak_N14:
+      typeIdx: 1
+      value: 0.810000
+    Tweak_N17:
+      typeIdx: 1
+      value: 0.680000
+    Tweak_N24:
+      typeIdx: 5
+      value: {x: 1.000000, y: 0.968627, z: 0.003922, w: 1.000000}
+    Tweak_N9:
+      typeIdx: 9
+      value:
+        id: 2f8a934a-7ee7-4212-9c10-877861f3bff1
+        sampler:
+          filteringMode: Bilinear
+          wrapModeU: ClampToEdge
+          wrapModeV: ClampToEdge
+          wrapModeW: Repeat
+          borderColor: {x: 0.000000, y: 0.000000, z: 0.000000, w: 1.000000}
+          mipmaps: false
+        type: Texture2D
+  Pass: !<reference> bda903f0-5433-49e4-9767-6858fa8e5e1a
