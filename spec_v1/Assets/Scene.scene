@@ -234,7 +234,7 @@
   PrefabRemaps:
     []
   Name: OpenAI Button
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: -10.850000, z: 2.500000}
@@ -840,7 +840,7 @@
   PrefabRemaps:
     []
   Name: Snap3DExample
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 40.000000, y: 0.000000, z: -100.000000}
@@ -1711,7 +1711,7 @@
   PrefabRemaps:
     []
   Name: Look Around Hint
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 8.000000, z: -100.000000}
@@ -1778,7 +1778,7 @@
   PrefabRemaps:
     []
   Name: OpenAI Realtime
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -3230,7 +3230,7 @@
   PrefabRemaps:
     []
   Name: Image Generator
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: -40.000000, y: 0.000000, z: -100.000000}
@@ -5367,7 +5367,7 @@
   PrefabRemaps:
     []
   Name: Hint
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: -3.000000, z: -100.000000}
@@ -5740,7 +5740,7 @@
   PrefabRemaps:
     []
   Name: HintTitle
-  Enabled: true
+  Enabled: false
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: 0.000000, y: 0.000000, z: -100.000000}
