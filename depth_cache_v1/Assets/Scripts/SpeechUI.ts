@@ -32,14 +32,18 @@ export class SpeechUI extends BaseScriptComponent {
   }
 
   private onStart() {
-    this.asrVoiceController.onPartialVoiceEvent.add((text) => {
-      this.speechText.text = text;
-    });
-    this.asrVoiceController.onFinalVoiceEvent.add((text) => {
-      this.speechText.text = text;
-      this.stopListening();
-      this.onSpeechReady.invoke(text);
-    });
+    if (this.asrVoiceController) {
+      this.asrVoiceController.onPartialVoiceEvent.add((text) => {
+        this.speechText.text = text;
+      });
+      this.asrVoiceController.onFinalVoiceEvent.add((text) => {
+        this.speechText.text = text;
+        this.stopListening();
+        this.onSpeechReady.invoke(text);
+      });
+    } else {
+      print("Warning: asrVoiceController not provided to SpeechUI");
+    }
   }
 
   activateSpeechButton(activate: boolean) {
@@ -51,13 +55,17 @@ export class SpeechUI extends BaseScriptComponent {
     this.speechText.text = "";
     this.animateSpeechBubble(true);
     this.animateSpeechIcon(true);
-    this.asrVoiceController.startListening();
+    if (this.asrVoiceController) {
+      this.asrVoiceController.startListening();
+    }
   }
 
   stopListening() {
     print("Disabling speech UI");
     this.animateSpeechIcon(false);
-    this.asrVoiceController.stopListening();
+    if (this.asrVoiceController) {
+      this.asrVoiceController.stopListening();
+    }
   }
 
   private onUpdate() {

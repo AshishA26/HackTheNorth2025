@@ -37,6 +37,11 @@ export class SceneController extends BaseScriptComponent {
 
   onAwake() {
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this));
+    
+    // Validate required inputs
+    if (!this.targetBoxController) {
+      print("Warning: targetBoxController not provided to SceneController");
+    }
   }
 
   onStart() {

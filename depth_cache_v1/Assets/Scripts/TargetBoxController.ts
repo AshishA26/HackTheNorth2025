@@ -2,13 +2,15 @@
 export class TargetBoxController extends BaseScriptComponent {
   @input
   @hint("The target box object to move")
-  targetBox: SceneObject;
+  targetBox: SceneObject = null;
 
   private targetBoxTransform: Transform = null;
 
   onAwake() {
     if (this.targetBox) {
       this.targetBoxTransform = this.targetBox.getTransform();
+    } else {
+      print("Warning: targetBox not provided to TargetBoxController");
     }
   }
 
@@ -24,7 +26,7 @@ export class TargetBoxController extends BaseScriptComponent {
         print(`TargetBox moved to: ${label} at (${worldPosition.x.toFixed(3)}, ${worldPosition.y.toFixed(3)}, ${worldPosition.z.toFixed(3)})`);
       }
     } else {
-      print("TargetBox transform not found!");
+      print("TargetBox not available - skipping movement");
     }
   }
 
@@ -35,6 +37,8 @@ export class TargetBoxController extends BaseScriptComponent {
     if (this.targetBoxTransform) {
       // Move far away to hide it
       this.targetBoxTransform.setWorldPosition(new vec3(0, -1000, 0));
+    } else {
+      print("TargetBox not available - skipping hide");
     }
   }
 
